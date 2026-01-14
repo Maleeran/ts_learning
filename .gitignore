@@ -1,0 +1,11 @@
+# 编辑器/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.js
+.DS_Store
+Thumbs.db
+
+node_modules/
+
