@@ -93,3 +93,66 @@ function longest<Type extends { length: number }>(a: Type, b: Type) {
 //     return { length: minimum };
 //   }
 // }
+
+// Specifying Type Arguments
+
+function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
+  return arr1.concat(arr2);
+}
+
+// const arr1 = combine([1, 2, 3], ["hello"]); // Type 'string' is not assignable to type 'number'.
+
+const arr = combine<string | number>([1, 2, 3], ["hello"]); // using union type can specify type arguments
+
+// Guidelines for Writing Good Generic Functions
+
+/* 1. Push Type Parameters Down. 
+   2. Use Fewer Type Parameters
+   3. Type Parameters Should Appear Twice
+
+*/
+
+// Optional Parameters
+
+function f(x?: number) {
+  // same as x: number|undefined
+  // ...
+}
+f(); // OK
+f(10); // OK
+
+// Optional Parameters in Callbacks
+function myForEach(arr: any[], callback: (arg: any, index?: number) => void) {
+  for (let i = 0; i < arr.length; i++) {
+    callback(arr[i], i);
+  }
+}
+
+// Function Overloads
+function makeFullName(firstName: string, lastName: string): string;
+function makeFullName(a: string, b: string, c: string): string;
+function makeFullName(firstNameOrA: string, b?: string, c?: string) {
+  if (c !== undefined) {
+    return `${firstNameOrA}·${b}·${c}`;
+  } else {
+    return `${firstNameOrA}·${b}`;
+  }
+}
+
+const name1 = makeFullName("Tom", "Asher");
+console.log(name1);
+const name2 = makeFullName("Tom", "Asher", "JR");
+console.log(name2);
+
+// Always prefer parameters with union types instead of overloads when possible
+
+// Declaring this in a Function
+
+const user = {
+  id: 123,
+
+  admin: false,
+  becomeAdmin: function () {
+    this.admin = true;
+  },
+};
