@@ -156,3 +156,29 @@ const user = {
     this.admin = true;
   },
 };
+
+// Other Types to Know About
+
+// 1.void
+// The inferred return type is void
+function noop() {
+  return;
+} // void !== undefined
+
+// 2.object
+
+// 3.unknown
+// safer than `any` type
+
+// 4.never
+
+// 5.Function
+
+// Rest Parameters and Arguments
+// Rest Parameters
+function multiply(n: number, ...m: number[]) {
+  return m.map((x) => n * x);
+}
+// 'a' gets value [10, 20, 30, 40]
+const a = multiply(10, 1, 2, 3, 4);
+console.log(a);
