@@ -1,3 +1,4 @@
+/*
 // Function Type Expressions
 function greeter(fn: (a: string) => void) {
   fn("Hello, World");
@@ -105,13 +106,12 @@ function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
 const arr = combine<string | number>([1, 2, 3], ["hello"]); // using union type can specify type arguments
 
 // Guidelines for Writing Good Generic Functions
-
+*/
 /* 1. Push Type Parameters Down. 
    2. Use Fewer Type Parameters
    3. Type Parameters Should Appear Twice
-
 */
-
+/*
 // Optional Parameters
 
 function f(x?: number) {
@@ -182,3 +182,47 @@ function multiply(n: number, ...m: number[]) {
 // 'a' gets value [10, 20, 30, 40]
 const a = multiply(10, 1, 2, 3, 4);
 console.log(a);
+
+// Rest Arguments
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+arr1.push(...arr2);
+
+// Parameter Destructuring
+function sum({ a, b, c }: { a: number; b: number; c: number }) {
+  console.log(a + b + c);
+}
+
+sum({ a: 10, b: 10, c: 20 });
+
+
+// Assignability of Functions
+// Return type `void`: not force functions to not return something
+type voidFunc = () => void;
+
+const f1: voidFunc = () => {
+  return true;
+};
+
+const f2: voidFunc = () => true;
+
+const f3: voidFunc = function () {
+  return true;
+};
+
+const v1 = f1(); //type: void
+
+const v2 = f2();
+
+const v3 = f3();
+
+console.log(v1);
+console.log(v2);
+console.log(v3);
+
+// a function has a void return type
+// must not return anything
+function f2():void {
+  return true // 不能将类型“boolean”分配给类“void”。
+}
+*/
