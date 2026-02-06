@@ -1,3 +1,4 @@
+/*
 // Object Types
 // 1. anonymous
 function greet(person: { name: string; age: number }) {
@@ -86,3 +87,81 @@ function evict(home: Home) {
 }
 
 //Index Signatures
+interface StringArray {
+  [index: number]: string;
+}
+
+const myArray: StringArray = ["John", "Alex"];
+const secondItem = myArray[1];
+// console.log(secondItem);
+
+interface NumberOrStringDictionary {
+  [index: string]: number | string;
+  length: number;
+  name: string;
+}
+const someDictionary: NumberOrStringDictionary = {
+  length: 17,
+  name: "alex",
+};
+// console.log(someDictionary.length);
+
+interface ReadonlyStringArray {
+  readonly [index: number]: string;
+}
+
+let myArrayList: ReadonlyStringArray = ["John", "Alex", "Tom"];
+// myArrayList[2] = "Lily"; // Index signature in type 'ReadonlyStringArray' only permits reading.
+
+// Extending Types
+interface BasicAddress {
+  name?: string;
+  street: string;
+  city: string;
+  country: string;
+  postalCode: string;
+}
+
+interface AddressWithUnit extends BasicAddress {
+  unit: string;
+}
+// interfaces can also extend from multiple types.
+interface Circle {
+  name: string;
+  radius: number;
+}
+interface Colorful {
+  color: string;
+}
+
+interface ColorfulCircle extends Circle, Colorful {}
+
+const colorfulCircle1 = {
+  name: "colorfulCircle1",
+  radius: 2,
+  color: "#fff",
+};
+*/
+
+// Intersection Types
+// using the & operator
+interface Circle {
+  name: string;
+  radius: number;
+}
+interface Colorful {
+  color: string;
+}
+type ColorfulCircle = Circle & Colorful;
+
+const draw = (circle: ColorfulCircle) => {
+  console.log(`the color: ${circle.color}`);
+  console.log(`the radius: ${circle.radius}`);
+};
+const colorfulCircle1: ColorfulCircle = {
+  name: "colorfulCircle1",
+  radius: 2,
+  color: "#fff",
+};
+
+draw(colorfulCircle1);
