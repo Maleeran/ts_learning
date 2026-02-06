@@ -141,7 +141,6 @@ const colorfulCircle1 = {
   radius: 2,
   color: "#fff",
 };
-*/
 
 // Intersection Types
 // using the & operator
@@ -165,3 +164,66 @@ const colorfulCircle1: ColorfulCircle = {
 };
 
 draw(colorfulCircle1);
+*/
+// Interface Extension vs. Intersection
+
+// Interface Extension
+interface Person {
+  name: string;
+}
+interface Person {
+  // name: number;  // (property) Person.name: string
+}
+
+// Generic Object Types
+interface Box<Type> {
+  content: Type;
+}
+
+const boxString: Box<string> = {
+  content: "Hello",
+};
+console.log(boxString);
+
+const boxNum: Box<number> = {
+  content: 12,
+};
+console.log(boxNum);
+type OrNull<Type> = null | Type;
+
+type OneOrMany<Type> = Type | Type[];
+
+type NullOrOneOrMany<Type> = OrNull<OneOrMany<Type>>;
+
+type NullOrOneOrManyString = OrNull<OneOrMany<string>>;
+
+// The Array Type
+const printArray = (a: Array<string>) => {
+  console.log(a);
+};
+// string[] is short shorthand for Array<string>
+
+// const a = new Array("Amy");
+interface Array<Type> {
+  length: number;
+}
+
+// The ReadonlyArray Type
+// const b = new ReadonlyArray("red", "green", "blue"); //'ReadonlyArray' only refers to a type, but is being used as a value here.
+
+function doStuff(values: readonly string[]) {
+  // We can read from 'values'...
+  const copy = values.slice();
+  console.log(`The first value is ${values[0]}`);
+
+  // ...but we can't mutate 'values'.
+  // values.push("hello!"); // Property 'push' does not exist on type 'readonly string[]'.
+}
+
+// Tuple Types
+type StringNumberPair = [string, number];
+const doSomething = (pair: StringNumberPair) => {
+  console.log(pair[0], pair[1]);
+};
+
+doSomething(["string", 12]);
