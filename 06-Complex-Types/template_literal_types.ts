@@ -38,3 +38,21 @@ const person = makeWatchedObject({
 person.on("firstNameChanged", (newValue) => {
   console.log(`firstName was changed to ${newValue}!`);
 });
+
+// Intrinsic String Manipulation Types
+// `Uppercase<StringType>`
+
+type Greeting = "hello world";
+type ShoutyGreeting = Uppercase<Greeting>;
+
+// `Lowercase<StringType>`
+type App = "My_App";
+type ASCIICacheKey<Str extends string> = `id-${Lowercase<Str>}`;
+
+type MyIdApp = ASCIICacheKey<App>;
+
+// `Capitalize<StringType>`
+type CapitalizeGreeting = Capitalize<Greeting>;
+
+// `Uncapitalize<StringType>`
+type UncapitalizeGreeting = Uncapitalize<ShoutyGreeting>;
