@@ -11,3 +11,30 @@ type AllLocaleIDs = `${EmailLocaleIDs | FooterLocaleIDs}_id`; //"welcome_email_i
 type Lang = "en" | "zh" | "pt";
 
 type LocaleMessageIDs = `${Lang}_${AllLocaleIDs}`; // "en_welcome_email_id" | "en_email_heading_id" | "en_footer_title_id" | "en_footer_sendoff_id" | "zh_welcome_email_id" | "zh_email_heading_id" | "zh_footer_title_id" | "zh_footer_sendoff_id" | "pt_welcome_email_id" | "pt_email_heading_id" | "pt_footer_title_id" | "pt_footer_sendoff_id"
+
+// String Unions in Types
+
+type PropEventSource<Type> = {
+  on(
+    eventName: `${string & keyof Type}Changed`,
+    callback: (newValue: any) => void,
+  ): void;
+};
+
+/// Create a "watched object" with an `on` method
+/// so that you can watch for changes to properties.
+declare function makeWatchedObject<Type>(
+  obj: Type,
+): Type & PropEventSource<Type>;
+
+const person = makeWatchedObject({
+  firstName: "Saoirse",
+  lastName: "Ronan",
+  age: 26,
+});
+
+// makeWatchedObject has added `on` to the anonymous Object
+
+person.on("firstNameChanged", (newValue) => {
+  console.log(`firstName was changed to ${newValue}!`);
+});
