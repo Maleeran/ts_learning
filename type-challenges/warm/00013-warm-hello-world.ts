@@ -1,5 +1,5 @@
 // ============= Test Cases =============
-import type { Equal, Expect, NotAny } from "./test-utils";
+import type { Equal, Expect, NotAny } from "../test-utils";
 
 type cases = [Expect<NotAny<HelloWorld>>, Expect<Equal<HelloWorld, string>>];
 
